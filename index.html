@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR MODULADOS | Móveis Sob Medida</title>
+    
+    <!-- Tailwind CSS para estilização rápida e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuração da Paleta de Cores Personalizada -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ar-orange': '#CC5500',      // Laranja Queimado
+                        'ar-black': '#1A1A1B',       // Preto Antracite
+                        'ar-gold-dark': '#8C734B',   // Cinza Dourado Escuro
+                        'ar-gold-mid': '#A68D5F',    // Cinza Dourado Médio
+                        'ar-gold-light': '#D4C4A8',  // Cinza Dourado Claro
+                        'ar-white': '#F4F4F4',       // Off-White/Gelo
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <!-- CSS Personalizado -->
+    <style>
+        body {
+            background-color: #1A1A1B; /* Fundo inicial Preto Antracite */
+            color: #F4F4F4; /* Texto Off-White */
+            overflow-x: hidden;
+        }
+
+        /* Esconder scrollbar padrão para um visual mais limpo */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1A1A1B;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CC5500;
+            border-radius: 10px;
+        }
+
+        /* Estilos do Acordeão */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+            opacity: 0;
+        }
+        .accordion-item.active .accordion-content {
+            opacity: 1;
+        }
+        .accordion-icon {
+            transition: transform 0.4s ease;
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Letra gigante vazada (Stroke) */
+        .text-stroke {
+            color: transparent;
+            -webkit-text-stroke: 1px #D4C4A8;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-ar-orange selection:text-ar-white">
+
+    <!-- Navbar -->
+    <header class="fixed top-0 w-full z-50 transition-all duration-300 py-6 px-8 flex justify-between items-center" id="navbar">
+        <div class="w-32 md:w-48">
+            <!-- Caminho atualizado para a pasta IMAGEM e extensão .png -->
+            <img src="IMAGEM/logo.png" alt="AR MODULADOS Logo" class="w-full h-auto rounded-md shadow-lg border border-ar-gold-dark/30">
+        </div>
+        <nav class="hidden md:flex gap-8 text-sm font-medium uppercase tracking-widest text-ar-white">
+            <a href="#sobre" class="hover:text-ar-orange transition-colors">Sobre</a>
+            <a href="#projetos" class="hover:text-ar-orange transition-colors">Projetos</a>
+            <a href="#processo" class="hover:text-ar-orange transition-colors">Processo</a>
+            <a href="#contato" class="hover:text-ar-orange transition-colors">Contato</a>
+        </nav>
+        <button class="md:hidden text-ar-white focus:outline-none">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </header>
+
+    <!-- Hero Section (Preto Antracite + Imagem) -->
+    <section class="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden">
+        <!-- Caminho atualizado para a pasta IMAGEM e extensão .png -->
+        <div class="absolute inset-0 z-0">
+            <img src="IMAGEM/model 1.png" alt="Cozinha Modulada" class="w-full h-full object-cover opacity-40 scale-105" id="hero-img">
+            <div class="absolute inset-0 bg-gradient-to-b from-ar-black/80 via-ar-black/40 to-ar-black"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 w-full max-w-6xl mx-auto mt-20">
+            <p class="text-ar-gold-mid uppercase tracking-[0.3em] text-sm md:text-base mb-6 gs-fade-up">Marcenaria de Alto Padrão</p>
+            <h1 class="text-6xl md:text-8xl lg:text-[10rem] font-display leading-none mb-6 gs-fade-up">AR<br><span class="text-ar-orange">MODULADOS</span></h1>
+            <p class="text-ar-white/80 text-lg md:text-2xl font-light max-w-2xl mx-auto gs-fade-up">Profundidade, autoridade e elegância moderna em cada detalhe do seu ambiente.</p>
+            
+            <div class="mt-12 gs-fade-up">
+                <a href="#projetos" class="inline-flex items-center gap-4 text-ar-white border border-ar-gold-mid px-8 py-4 rounded-full hover:bg-ar-orange hover:border-ar-orange hover:text-ar-white transition-all duration-300">
+                    <span class="uppercase tracking-widest text-sm">Ver Projetos</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statement Section (Laranja Queimado - Energia e Calor) -->
+    <section id="sobre" class="bg-ar-orange text-ar-white py-24 md:py-40 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-6xl lg:text-7xl font-display leading-tight gs-reveal-text">
+                Transformamos o conceito de morar bem. Unimos a precisão técnica ao design contemporâneo para criar espaços que respiram <span class="text-ar-black italic">personalidade e funcionalidade.</span>
+            </h2>
+        </div>
+    </section>
+
+    <!-- Projetos / Gallery Section (Off-White - Respiro Visual) -->
+    <section id="projetos" class="bg-ar-white text-ar-black py-24">
+        <div class="max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row justify-between items-end">
+            <div>
+                <p class="text-ar-orange uppercase tracking-widest font-bold mb-2">Nosso Portfólio</p>
+                <h2 class="text-5xl md:text-7xl font-display font-semibold">Ambientes</h2>
+            </div>
+            <p class="text-ar-black/60 max-w-md text-lg mt-6 md:mt-0 font-light">
+                Explore a harmonia perfeita entre o Cinza Dourado e elementos neutros em nossos projetos recentes.
+            </p>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8 px-6 md:px-12 overflow-x-hidden md:overflow-x-visible">
+            <!-- Card 1 -->
+            <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 group gs-card">
+                <div class="overflow-hidden rounded-lg aspect-[4/5] relative bg-gray-200">
+                    <!-- Caminho atualizado para a pasta IMAGEM e extensão .png -->
+                    <img src="IMAGEM/model 2.png" alt="Sala Planejada" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-ar-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+                <div class="mt-6">
+                    <h3 class="text-2xl font-display font-semibold">Salas de Estar</h3>
+                    <p class="text-ar-gold-dark mt-2">Luxo e Neutralidade</p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 group gs-card mt-0 md:mt-20">
+                <div class="overflow-hidden rounded-lg aspect-[4/5] relative bg-gray-200">
+                    <!-- Caminho atualizado para a pasta IMAGEM e extensão .png -->
+                    <img src="IMAGEM/model 3.png" alt="Quarto Modulado" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-ar-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+                <div class="mt-6">
+                    <h3 class="text-2xl font-display font-semibold">Dormitórios</h3>
+                    <p class="text-ar-gold-dark mt-2">Equilíbrio e Conforto</p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 group gs-card mt-0 md:mt-40">
+                <div class="overflow-hidden rounded-lg aspect-[4/5] relative bg-gray-200">
+                    <!-- Caminho atualizado para a pasta IMAGEM e extensão .jpeg -->
+                    <img src="IMAGEM/model 4.jpeg" alt="Cozinha Modulada" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-ar-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+                <div class="mt-6">
+                    <h3 class="text-2xl font-display font-semibold">Cozinhas Gourmet</h3>
+                    <p class="text-ar-gold-dark mt-2">Praticidade e Estilo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process / Acordeão Section (Preto Antracite) -->
+    <section id="processo" class="bg-ar-black text-ar-white py-24 md:py-40 px-6 relative">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
+            
+            <div class="lg:col-span-5 sticky top-32 self-start">
+                <p class="text-ar-gold-mid uppercase tracking-widest font-bold mb-4">O Método AR</p>
+                <h2 class="text-5xl md:text-7xl font-display font-semibold leading-tight">Do papel<br>à <span class="text-ar-orange">realidade.</span></h2>
+                <p class="mt-8 text-ar-white/70 text-lg font-light">
+                    Nosso processo é desenhado para garantir excelência em todas as etapas, desde a escolha da paleta de cores até a instalação final.
+                </p>
+            </div>
+
+            <div class="lg:col-span-7">
+                <div class="border-t border-ar-white/20 accordion-item gs-accordion group cursor-pointer">
+                    <div class="py-8 md:py-12 flex justify-between items-center accordion-header">
+                        <div class="flex items-center gap-8">
+                            <span class="text-4xl md:text-6xl font-display text-stroke opacity-50 group-hover:opacity-100 transition-opacity">01</span>
+                            <h3 class="text-2xl md:text-4xl font-light group-hover:text-ar-orange transition-colors">Consultoria e Briefing</h3>
+                        </div>
+                        <div class="w-8 h-8 relative accordion-icon">
+                            <div class="absolute w-full h-[2px] bg-ar-white top-1/2 -translate-y-1/2"></div>
+                            <div class="absolute w-[2px] h-full bg-ar-white left-1/2 -translate-x-1/2"></div>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="pb-12 text-ar-white/70 text-lg md:text-xl font-light pr-12 md:pl-24">
+                            Entendemos suas necessidades, analisamos o espaço e apresentamos as melhores opções de materiais, utilizando a paleta ideal para o seu perfil.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-t border-ar-white/20 accordion-item gs-accordion group cursor-pointer">
+                    <div class="py-8 md:py-12 flex justify-between items-center accordion-header">
+                        <div class="flex items-center gap-8">
+                            <span class="text-4xl md:text-6xl font-display text-stroke opacity-50 group-hover:opacity-100 transition-opacity">02</span>
+                            <h3 class="text-2xl md:text-4xl font-light group-hover:text-ar-orange transition-colors">Projeto 3D</h3>
+                        </div>
+                        <div class="w-8 h-8 relative accordion-icon">
+                            <div class="absolute w-full h-[2px] bg-ar-white top-1/2 -translate-y-1/2"></div>
+                            <div class="absolute w-[2px] h-full bg-ar-white left-1/2 -translate-x-1/2"></div>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="pb-12 text-ar-white/70 text-lg md:text-xl font-light pr-12 md:pl-24">
+                            Modelamos seu ambiente em tecnologia 3D de alta renderização, permitindo visualizar exatamente como ficará a harmonização do Laranja Queimado e do Preto Antracite antes da produção.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-t border-ar-white/20 accordion-item gs-accordion group cursor-pointer">
+                    <div class="py-8 md:py-12 flex justify-between items-center accordion-header">
+                        <div class="flex items-center gap-8">
+                            <span class="text-4xl md:text-6xl font-display text-stroke opacity-50 group-hover:opacity-100 transition-opacity">03</span>
+                            <h3 class="text-2xl md:text-4xl font-light group-hover:text-ar-orange transition-colors">Fabricação Precisa</h3>
+                        </div>
+                        <div class="w-8 h-8 relative accordion-icon">
+                            <div class="absolute w-full h-[2px] bg-ar-white top-1/2 -translate-y-1/2"></div>
+                            <div class="absolute w-[2px] h-full bg-ar-white left-1/2 -translate-x-1/2"></div>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="pb-12 text-ar-white/70 text-lg md:text-xl font-light pr-12 md:pl-24">
+                            Corte e borda feitos com maquinário de ponta. Garantimos o uso de madeiras e acabamentos selecionados que trazem a profundidade e a elegância esperada.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-t border-b border-ar-white/20 accordion-item gs-accordion group cursor-pointer">
+                    <div class="py-8 md:py-12 flex justify-between items-center accordion-header">
+                        <div class="flex items-center gap-8">
+                            <span class="text-4xl md:text-6xl font-display text-stroke opacity-50 group-hover:opacity-100 transition-opacity">04</span>
+                            <h3 class="text-2xl md:text-4xl font-light group-hover:text-ar-orange transition-colors">Instalação</h3>
+                        </div>
+                        <div class="w-8 h-8 relative accordion-icon">
+                            <div class="absolute w-full h-[2px] bg-ar-white top-1/2 -translate-y-1/2"></div>
+                            <div class="absolute w-[2px] h-full bg-ar-white left-1/2 -translate-x-1/2"></div>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="pb-12 text-ar-white/70 text-lg md:text-xl font-light pr-12 md:pl-24">
+                            Nossa equipe técnica realiza a montagem com perfeição. Limpeza, ajustes finos e entrega de um ambiente pronto para ser vivido.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato & Localização -->
+    <section id="contato" class="bg-ar-white text-ar-black py-24 md:py-40 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+            
+            <!-- Forms -->
+            <div>
+                <h2 class="text-5xl md:text-7xl font-display font-semibold mb-8">Fale Conosco</h2>
+                <p class="text-xl font-light mb-12 text-ar-black/70">Pronto para dar o próximo passo? Deixe sua mensagem e nossa equipe entrará em contato.</p>
+                
+                <form class="space-y-6">
+                    <div>
+                        <input type="text" placeholder="Seu Nome" class="w-full bg-transparent border-b border-ar-black/30 py-4 focus:outline-none focus:border-ar-orange transition-colors text-lg placeholder:text-ar-black/40">
+                    </div>
+                    <div>
+                        <input type="email" placeholder="E-mail" class="w-full bg-transparent border-b border-ar-black/30 py-4 focus:outline-none focus:border-ar-orange transition-colors text-lg placeholder:text-ar-black/40">
+                    </div>
+                    <div>
+                        <textarea placeholder="Como podemos ajudar?" rows="4" class="w-full bg-transparent border-b border-ar-black/30 py-4 focus:outline-none focus:border-ar-orange transition-colors text-lg placeholder:text-ar-black/40 resize-none"></textarea>
+                    </div>
+                    <button type="button" class="bg-ar-black text-ar-white px-10 py-4 rounded-full font-medium tracking-wide hover:bg-ar-orange transition-colors mt-8 w-full md:w-auto">
+                        ENVIAR MENSAGEM
+                    </button>
+                </form>
+            </div>
+
+            <!-- Mapa / Info -->
+            <div class="flex flex-col justify-between">
+                <div class="bg-ar-black text-ar-white p-10 md:p-14 rounded-2xl">
+                    <h3 class="text-3xl font-display font-semibold mb-6">Nossa Localização</h3>
+                    <p class="text-ar-white/80 font-light text-lg mb-8">
+                        Visite nosso showroom e sinta a qualidade dos nossos acabamentos pessoalmente.
+                    </p>
+                    <a href="https://maps.app.goo.gl/YEyQeXKTWL76dw128" target="_blank" class="inline-flex items-center gap-3 text-ar-orange hover:text-ar-gold-light transition-colors font-medium tracking-wide mb-12">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        ABRIR NO GOOGLE MAPS
+                    </a>
+
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center border-b border-ar-white/10 pb-4">
+                            <span class="text-ar-white/60">WhatsApp</span>
+                            <!-- Link do WhatsApp adicionado -->
+                            <a href="https://wa.me/5591981526323" target="_blank" class="font-medium hover:text-ar-orange transition-colors">(91) 98152-6323</a>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-ar-white/10 pb-4">
+                            <span class="text-ar-white/60">Email</span>
+                            <span class="font-medium">contato@armodulados.com.br</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-ar-black text-ar-white border-t border-ar-white/10 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="w-32">
+                <!-- Caminho atualizado para a pasta IMAGEM e extensão .png -->
+                <img src="IMAGEM/logo.png" alt="AR MODULADOS" class="w-full grayscale opacity-70">
+            </div>
+            <p class="text-ar-white/40 text-sm font-light text-center md:text-left">
+                &copy; 2026 AR MODULADOS. Todos os direitos reservados.
+            </p>
+            <div class="flex gap-4">
+                <a href="#" class="text-ar-white/60 hover:text-ar-orange transition-colors">Instagram</a>
+                <a href="#" class="text-ar-white/60 hover:text-ar-orange transition-colors">Facebook</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts: Lenis (Scroll Suave) + GSAP (Animações) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        // 1. Configuração do Lenis (Smooth Scroll)
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smooth: true,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // 2. Efeito no Navbar ao rolar
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-ar-black/95', 'backdrop-blur-sm', 'shadow-md', 'py-4');
+                navbar.classList.remove('py-6');
+            } else {
+                navbar.classList.remove('bg-ar-black/95', 'backdrop-blur-sm', 'shadow-md', 'py-4');
+                navbar.classList.add('py-6');
+            }
+        });
+
+        // 3. Animações GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.to("#hero-img", {
+            yPercent: 20,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "header",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        gsap.from(".gs-fade-up", {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out",
+            delay: 0.2
+        });
+
+        gsap.from(".gs-reveal-text", {
+            scrollTrigger: {
+                trigger: "#sobre",
+                start: "top 80%",
+            },
+            y: 40,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power4.out"
+        });
+
+        gsap.utils.toArray('.gs-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                },
+                y: 100,
+                opacity: 0,
+                duration: 1,
+                delay: i * 0.1,
+                ease: "power3.out"
+            });
+        });
+
+        // 4. Lógica do Acordeão (Processo)
+        const accordions = document.querySelectorAll('.accordion-item');
+
+        accordions.forEach((acc) => {
+            const header = acc.querySelector('.accordion-header');
+            const content = acc.querySelector('.accordion-content');
+
+            header.addEventListener('click', () => {
+                accordions.forEach((otherAcc) => {
+                    if (otherAcc !== acc) {
+                        otherAcc.classList.remove('active');
+                        otherAcc.querySelector('.accordion-content').style.maxHeight = null;
+                    }
+                });
+
+                acc.classList.toggle('active');
+                if (acc.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } else {
+                    content.style.maxHeight = null;
+                }
+            });
+        });
+
+        if(accordions.length > 0) {
+            accordions[0].classList.add('active');
+            const firstContent = accordions[0].querySelector('.accordion-content');
+            firstContent.style.maxHeight = firstContent.scrollHeight + "px";
+        }
+
+        gsap.from(".gs-accordion", {
+            scrollTrigger: {
+                trigger: "#processo",
+                start: "top 70%",
+            },
+            x: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out"
+        });
+    </script>
+</body>
+</html>
